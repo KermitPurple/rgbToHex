@@ -2,7 +2,7 @@ import unittest
 from sys import argv
 
 def rgb_to_hex(rgb: tuple) -> str:
-    if not (len(rgb) != 3 or False in [val > 255 for val in rgb]):
+    if len(rgb) != 3 or False in [val >= 0 and val <= 255 for val in rgb]:
         return "000000"
     dct = {
             0: "0",
@@ -39,6 +39,12 @@ class rgb_to_hex_test(unittest.TestCase):
 
     def test4(self):
         self.assertEqual(rgb_to_hex((10, 11, 12)), "0a0b0c")
+
+    def test5(self):
+        self.assertEqual(rgb_to_hex((256, 0, 0)), "000000")
+
+    def test6(self):
+        self.assertEqual(rgb_to_hex((-1, 0, 0)), "000000")
 
 def main():
     if len(argv) == 1:
