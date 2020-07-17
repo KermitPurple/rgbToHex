@@ -1,6 +1,8 @@
 import unittest
+from sys import argv
 
 def rgb_to_hex(rgb: tuple) -> str:
+    if not (len(rgb) != 3 or False in [val > 255 for val in rgb]):
         return "000000"
     dct = {
             0: "0",
@@ -39,7 +41,14 @@ class rgb_to_hex_test(unittest.TestCase):
         self.assertEqual(rgb_to_hex((10, 11, 12)), "0a0b0c")
 
 def main():
-    unittest.main()
+    if len(argv) == 1:
+        unittest.main()
+    elif len(argv) == 4:
+        _ = argv.pop(0)
+        rgb = [int(val) for val in argv]
+        print("rgb(" + ", ".join(argv) + ") = " + rgb_to_hex(tuple(rgb)))
+    else:
+        print("Incorrect Usage.")
 
 if __name__ == "__main__":
     main()
