@@ -52,7 +52,7 @@ def main():
     elif len(argv) == 4:
         _ = argv.pop(0)
         rgb = [int(val) for val in argv]
-        print("rgb(" + ", ".join(argv) + ") = " + rgb_to_hex(tuple(rgb)))
+        print("rgb(" + ", ".join(argv) + ") = #" + rgb_to_hex(tuple(rgb)))
     else:
         print("Incorrect Usage.")
 
